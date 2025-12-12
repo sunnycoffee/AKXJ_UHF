@@ -1,8 +1,10 @@
-package me.coffee.uhf.akxj;
+package me.coffee.uhf;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+
+import me.coffee.uhf.akxj.UHFManager;
 
 public class MainActivity extends Activity {
 
