@@ -92,6 +92,11 @@ public class UHFManager {
         if (mReader != null) mReader.StartRead();
     }
 
+    public void read(ScanCallback callback) {
+        this.mCallback = callback;
+        if (mReader != null) mReader.ScanRfid();
+    }
+
     public void stop() {
         mCallback = null;
         if (mReader != null) mReader.StopRead();
