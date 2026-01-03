@@ -33,13 +33,13 @@ public class UHFManager {
         this.context = context.getApplicationContext();
         if (mReader == null) {
             mReader = new ReaderHelp();
-            mReader.PowerControll(this.context, true);
-
-            int flag = mReader.Connect(PORT, 57600, 0);
+            OtgUtils.setPOGOPINEnable(true);
+            initRfid();
+            int flag = mReader.Connect(PORT, 57600, 1);
             Log.d(TAG, "串口连接:" + flag);
-            if (flag != 0) flag = mReader.Connect(PORT, 115200, 0);
+            if (flag != 0) flag = mReader.Connect(PORT, 115200, 1);
             if (flag == 0) {
-                initRfid();
+
                 mReader.SetCallBack(new TagCallback() {
                     @Override
                     public void tagCallback(ReadTag readTag) {
@@ -106,9 +106,9 @@ public class UHFManager {
         mCallback = null;
         if (mReader != null) {
             mReader.DisConnect();
-            if (context != null) mReader.PowerControll(context, false);
         }
         mReader = null;
+        OtgUtils.setPOGOPINEnable(false);
     }
 
     public interface ScanCallback {
